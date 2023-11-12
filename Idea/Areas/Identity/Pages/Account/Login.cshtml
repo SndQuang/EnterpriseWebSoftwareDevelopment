@@ -1,0 +1,87 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-center">Log in</h2>
+        </div>
+        <div class="card-body">
+            <form id="account" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <div class="mb-3">
+                    <label for="input-username" class="form-label">Email</label>
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" id="input-username" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="input-password" class="form-label">Password</label>
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" id="input-password" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="mb-3 form-check">
+                    <input asp-for="Input.RememberMe" class="form-check-input" id="remember-me" />
+                    <label class="form-check-label" for="remember-me">Remember me</label>
+                </div>
+                <div class="d-grid gap-2">
+                    <button id="login-submit" type="submit" class="btn btn-primary">Log in</button>
+                </div>
+            </form>
+            <hr />
+            <div class="row">
+                <div class="col">
+                    <h4 class="text-center">Sample Accounts:</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Admin: <span id="sample-admin">admin@test.com</span>
+                            <button class="btn btn-sm btn-outline-secondary copy-email-btn" data-value="admin@test.com">Copy</button>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Manager: <span id="sample-manager">manager@test.com</span>
+                            <button class="btn btn-sm btn-outline-secondary copy-email-btn" data-value="manager@test.com">Copy</button>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Staff 01: <span id="sample-staff-01">staff_01@test.com</span>
+                            <button class="btn btn-sm btn-outline-secondary copy-email-btn" data-value="staff_01@test.com">Copy</button>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Staff 02: <span id="sample-staff-02">staff_02@test.com</span>
+                            <button class="btn btn-sm btn-outline-secondary copy-email-btn" data-value="staff_02@test.com">Copy</button>
+                        </li>            
+                    </ul>
+                </div>
+                <div class="col">
+                    <h4 class="text-center">Sample Password:</h4>
+                    <span id="sample-password">abcABC@123</span>
+                    <button class="btn btn-sm btn-outline-secondary copy-password-btn" data-value="abcABC@123">Copy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        var input_username = document.getElementById("input-username");
+        var input_password = document.getElementById("input-password");
+
+        var copyEmailButtons = document.querySelectorAll(".copy-email-btn");
+        var copyPasswordButtons = document.querySelectorAll(".copy-password-btn");
+
+        copyEmailButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                input_username.value = button.getAttribute("data-value");
+            });
+        });
+
+        copyPasswordButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                input_password.value = button.getAttribute("data-value");
+            });
+        });
+    </script>
+}

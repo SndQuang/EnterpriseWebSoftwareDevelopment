@@ -1,0 +1,34 @@
+﻿@{
+    var Departments = (List<Department>)ViewData["Departments"];
+    var Ideas = (List<NIdea>)ViewData["Ideas"];
+}
+<style>
+    .table-statistics {
+        background-color: black;
+        color: white;
+        border-color: black;
+    }
+
+    .column-highlight {
+        background-color: #FFC0CB;
+    }
+</style>
+<table class="table table-bordered border-primary table-statistics">
+    <thead>
+        <tr>
+            <th>Department Name</th>
+            <th>Idea Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var department in Departments)
+        {
+            <tr>
+                <td>@department.Name</td>
+                <td>
+                    @Ideas.Count(i => i.User.Department.Id == department.Id)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

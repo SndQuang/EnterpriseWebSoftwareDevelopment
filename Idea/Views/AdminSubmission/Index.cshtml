@@ -1,0 +1,62 @@
+@model IEnumerable<Idea.Models.Submission>
+
+@{
+    ViewData["Title"] = "Submission";
+}
+
+<style>
+    .table-submission {
+        background-color: black;
+        color: white;
+        border-color: black;
+    }
+
+    .column-highlight {
+        background-color: #FFC0CB;
+    }
+</style>
+
+<h3>@ViewData["Title"]</h3>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New</a>
+</p>
+
+<table class="table table-bordered border-primary table-submission">
+    <thead>
+        <tr>
+            <th class="column-highlight">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th class="column-highlight">
+                @Html.DisplayNameFor(model => model.Deadline_1)
+            </th>
+            <th class="column-highlight">
+                @Html.DisplayNameFor(model => model.Deadline_2)
+            </th>
+            <th class="column-highlight">Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="column-highlight">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="column-highlight">
+                    @Html.DisplayFor(modelItem => item.Deadline_1)
+                </td>
+                <td class="column-highlight">
+                    @Html.DisplayFor(modelItem => item.Deadline_2)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
